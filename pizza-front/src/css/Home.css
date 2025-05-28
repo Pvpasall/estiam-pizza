@@ -1,0 +1,34 @@
+body {
+    background-image: url(../assets/table2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f0f0f0f0;
+}
+
+.accueil{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.souhait{
+    color: #ff9800;
+    font-size: 16px;
+}
+
+.couleur {
+    color: white;
+    font-size: 24px;
+}
+ .couleur2{
+        color: white;
+        font-size: 14px;
+}
+ .couleur3{
+        color: #ff9800;
+        font-size: 14px;
+        background-color:wheat;
+}
+.valide{
+    padding-top: 100px;
+}
