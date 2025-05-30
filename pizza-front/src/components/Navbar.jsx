@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-scroll'
 import './Navbar.css'
 import imageLogo from '../assets/pizza.png'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
@@ -12,9 +12,9 @@ function Navbar() {
                 <h1>PizzeriaFree</h1>
             </div>
             <ul className='navbar--link'>
-                <li className='navbar--link-item'>Accueil</li>
-                <li className='navbar--link-item'>Menu</li>
-                <li className='navbar--link-item'>Contact</li>
+                <li className='navbar--link-item'><Link to="/">Accueil</Link></li>
+                <li className='navbar--link-item'><Link to="/menu">Menu</Link></li>
+                <li className='navbar--link-item'><Link to="/contact">Contact</Link></li>
             </ul>
         </nav>
     </header>
