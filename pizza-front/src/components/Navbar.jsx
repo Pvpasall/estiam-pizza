@@ -2,8 +2,9 @@ import React from 'react'
 import './Navbar.css'
 import imageLogo from '../assets/pizza.png'
 import { Link } from 'react-router-dom'
+import {FaShoppingCart} from 'react-icons/fa'
 
-function Navbar() {
+function Navbar({cartCount}) {
   return (
     <header>
         <nav className="navbar">
@@ -12,9 +13,14 @@ function Navbar() {
                 <h1>PizzeriaFree</h1>
             </div>
             <ul className='navbar--link'>
-                <li className='navbar--link-item'><Link to="/">Accueil</Link></li>
-                <li className='navbar--link-item'><Link to="/menu">Menu</Link></li>
-                <li className='navbar--link-item'><Link to="/contact">Contact</Link></li>
+                <li className='navbar--link-item'><Link className='nav' to="/">Accueil</Link></li>
+                <li className='navbar--link-item'><Link className='nav' to="/menu">Menu</Link></li>
+                <li className='navbar--link-item'><Link className='nav' to="/contact">Contact</Link></li>
+                <li className='navbar--link-item'>
+                    <Link className='nav cart-link' to="/panier" style={{position: "relative"}}>
+                        <FaShoppingCart size={24} />
+                        {cartCount > 0 && (<span className='cart-badge'>{cartCount}</span>)}
+                    </Link></li>
             </ul>
         </nav>
     </header>

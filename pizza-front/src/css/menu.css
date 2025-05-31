@@ -43,7 +43,8 @@ h1 {
 .pizza-info h3 {
   margin: 0 0 10px 0;
   font-size: 1.4rem;
-  color: #333;
+  /*color: #333;*/
+  color: white;
 }
 
 .price {
@@ -61,4 +62,24 @@ h1 {
 
 .error {
   color: #ff0000;
+}
+.quantity-controls{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity-controls button{
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.add-to-cart{
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  cursor: pointer;
 }
