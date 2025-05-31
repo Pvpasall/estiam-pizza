@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship, create_engine, Session
 from uuid import UUID, uuid4
-import datetime
+from datetime import datetime
 from typing import List, Optional
 
 
