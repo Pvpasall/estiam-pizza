@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Margherita Classique",
+    "price": 8.99,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "Pepperoni Explosion",
+    "price": 11.50,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "Végétarienne Gourmande",
+    "price": 12.75,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 4,
+    "name": "4 Fromages Fondants",
+    "price": 13.25,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 5,
+    "name": "Hawaïenne Tropicale",
+    "price": 10.99,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "Calzone Farci",
+    "price": 14.50,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 7,
+    "name": "Diavola Piquante",
+    "price": 12.99,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 8,
+    "name": "Truffée Royale",
+    "price": 18.75,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 9,
+    "name": "Méditerranéenne",
+    "price": 13.40,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 10,
+    "name": "Carbonara",
+    "price": 11.95,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 11,
+    "name": "Savoyarde",
+    "price": 15.25,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 12,
+    "name": "Tex-Mex",
+    "price": 12.30,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 13,
+    "name": "Nordique",
+    "price": 16.80,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 14,
+    "name": "Reine",
+    "price": 11.25,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 15,
+    "name": "Raclette",
+    "price": 14.99,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 16,
+    "name": "Forestière",
+    "price": 13.75,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 17,
+    "name": "BBQ Chicken",
+    "price": 12.45,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 18,
+    "name": "Sicilienne",
+    "price": 10.50,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 19,
+    "name": "Kebab",
+    "price": 13.90,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  },
+  {
+    "id": 20,
+    "name": "Déluxe Chef",
+    "price": 17.50,
+    "image_url": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
+  }
+]

@@ -1,13 +1,30 @@
 import './App.css'
-import {Routes, Route} from 'react-router-dom'
-import { Commandes } from './pages/Commandes'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Menus from './pages/Menus'
+import Contact from './pages/Contact'
+import Paniers from './pages/Paniers'
+import { useState } from 'react'
+
 
 function App() {
-
+     const [cart, setCart] = useState([]);
+     const cartCount= cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
-    <Routes>
-      <Route path="/" element={<Commandes/>}/>
-    </Routes>
+       
+       <>
+       <Navbar cartCount ={cartCount} />
+            
+            <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/menu" element={<Menus cart={cart} setCart={setCart} />}/>
+                <Route path="/contact" element={<Contact />}/>
+                <Route path="/panier" element={<Paniers cart={cart} />}/>
+            </Routes>
+
+
+       </>
   )
 }
 
