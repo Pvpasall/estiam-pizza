@@ -3,14 +3,20 @@ from uuid import UUID, uuid4
 import datetime
 from typing import List, Optional
 
+
 class Pizza(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     name: str = Field(index=True)
-    ingredients: str
+    ingredients: List["Ingredients"] = Relationship(back_populates="ingredient")
     price: float
     is_available: bool = Field(default=True)
     orders: List["OrderItem"] = Relationship(back_populates="pizza")
 
+
+class Ingredients(SQLModel, table=True):
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    ingredient: str = Field(index=True)
+    
 class Client(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     nom: str = Field(index=True)
