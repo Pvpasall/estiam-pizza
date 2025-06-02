@@ -112,6 +112,10 @@ pizza_data = [
 
 
 def create_test_data(session: Session):
+    existing_pizzas = session.query(Pizza).first()
+    if existing_pizzas:
+        print("Données de test déjà présentes, pas de création")
+        return
     
     ingredients = {}
     for ing_data in ingredients_data:
