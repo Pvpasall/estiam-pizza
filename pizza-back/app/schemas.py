@@ -8,6 +8,16 @@ class ClientCreate(BaseModel):
     phone: Optional[str] = None
     address: Optional[str] = None
 
+class PizzaCreate(BaseModel):
+    name: str
+    price: float
+    is_available: bool = True
+
+class PizzaUpdate(BaseModel):
+    name: Optional[str]
+    price: Optional[float]
+    is_available: Optional[bool]
+
 class OrderItemCreate(BaseModel):
     pizza_id: UUID
     quantity: int
@@ -16,4 +26,8 @@ class OrderItemCreate(BaseModel):
 class OrderCreate(BaseModel):
     client: ClientCreate
     items: List[OrderItemCreate]
+    delivery_address: Optional[str] = None
+
+class OrderUpdate(BaseModel):
+    status: Optional[str] = None
     delivery_address: Optional[str] = None
