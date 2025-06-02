@@ -3,7 +3,7 @@ from sqlmodel import Session, select
 from typing import List
 from uuid import UUID
 from app.database import Order, OrderItem, Client, get_session
-from app.schemas import OrderCreate  # On va définir ces schémas pour la requête
+from app.schemas import OrderCreate, OrderUpdate  
 
 router = APIRouter(
     prefix="/orders",
@@ -47,3 +47,34 @@ def create_order(order_data: OrderCreate, session: Session = Depends(get_session
 
     session.commit()
     return {"message": "Commande créée", "order_id": str(new_order.id)}
+
+@router.get("/", response_model=List[Order])
+def list_orders(session: Session = Depends(get_session)):
+    return session.exec(select(Order)).all()
+
+@router.get("/{order_id}", response_model=Order)
+def get_order(order_id: UUID, session: Session = Depends(get_session)):
+    order = session.get(Order, order_id)
+    if not order:
+        raise HTTPException(status_code=404, detail="Commande non trouvée")
+    return order
+
+@router.put("/{order_id}", response_model=Order)
+def update_order(order_id: UUID, update: OrderUpdate, session: Session = Depends(get_session)):
+    order = session.get(Order, order_id)
+    if not order:
+        raise HTTPException(status_code=404, detail="Commande non trouvée")
+    for key, value in update.dict(exclude_unset=True).items():
+        setattr(order, key, value)
+    session.commit()
+    session.refresh(order)
+    return order
+
+@router.delete("/{order_id}")
+def delete_order(order_id: UUID, session: Session = Depends(get_session)):
+    order = session.get(Order, order_id)
+    if not order:
+        raise HTTPException(status_code=404, detail="Commande non trouvée")
+    session.delete(order)
+    session.commit()
+    return {"message": "Commande supprimée"}

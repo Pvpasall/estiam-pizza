@@ -3,19 +3,28 @@ from uuid import UUID, uuid4
 from datetime import datetime
 from typing import List, Optional
 
+class PizzaIngredientLink(SQLModel, table=True):
+    pizza_id: UUID = Field(foreign_key="pizza.id", primary_key=True)
+    ingredient_id: UUID = Field(foreign_key="ingredients.id", primary_key=True)
 
 class Pizza(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     name: str = Field(index=True)
-    ingredients: List["Ingredients"] = Relationship(back_populates="ingredient")
+    ingredients: List["Ingredients"] = Relationship(
+        back_populates="pizzas",
+        link_model=PizzaIngredientLink
+    )
     price: float
     is_available: bool = Field(default=True)
     orders: List["OrderItem"] = Relationship(back_populates="pizza")
 
-
 class Ingredients(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     ingredient: str = Field(index=True)
+    pizzas: List["Pizza"] = Relationship(
+        back_populates="ingredients", 
+        link_model=PizzaIngredientLink
+    )
     
 class Client(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
@@ -63,3 +72,6 @@ def create_db_and_tables():
 def get_session():
     with Session(engine) as session:
         yield session
+
+def get_session_obj():
+    return Session(engine)
