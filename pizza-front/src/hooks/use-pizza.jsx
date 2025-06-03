@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 
 const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/pizzas`
 
+/**
+ * @typedef {Object} Pizza
+ * @property {string} id
+ * @property {string} name
+ * @property {number} price
+ * @property {boolean} is_available
+ */
 const usePizzas = () => {
   const [pizzas, setPizzas] = useState([]);
   const [loading, setLoading] = useState(true);
