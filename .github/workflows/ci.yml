@@ -1,0 +1,34 @@
+name: CI/CD - Pizza
+
+on:
+  pull_request:
+    branches: [main, stage, feat/ci]
+
+jobs:
+  frontend:
+    name: Pizza front
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pizza front Docker image
+        run: docker build -t pizza-front ./pizza-front
+
+      - name: Run frontend tests
+        run: docker run --rm pizza-front
+
+  backend:
+    name: Pizza backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pizza back Docker image
+        run: docker build -t pizza-back ./pizza-back
+
+      - name: Run backend tests
+        run: docker run --rm pizza-back
