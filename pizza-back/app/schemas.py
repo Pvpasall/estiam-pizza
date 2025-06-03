@@ -31,3 +31,17 @@ class OrderCreate(BaseModel):
 class OrderUpdate(BaseModel):
     status: Optional[str] = None
     delivery_address: Optional[str] = None
+
+class IngredientResponse(BaseModel):
+    id: UUID
+    ingredient: str
+
+class PizzaResponse(BaseModel):
+    id: UUID
+    name: str
+    price: float
+    is_available: bool
+    ingredients: List[IngredientResponse] = []
+
+    class Config:
+        from_attributes = True
