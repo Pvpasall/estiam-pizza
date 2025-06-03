@@ -11,7 +11,7 @@ class Pizza(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     name: str = Field(index=True)
     ingredients: List["Ingredients"] = Relationship(
-        back_populates="pizzas", 
+        back_populates="pizzas",
         link_model=PizzaIngredientLink
     )
     price: float
