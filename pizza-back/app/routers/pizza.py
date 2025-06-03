@@ -17,11 +17,14 @@ def list_pizzas(session: Session = Depends(get_session)):
     pizzas = session.exec(statement).all()
     return pizzas
 
-@router.get("/{pizza_id}", response_model=Pizza)
+@router.get("/{pizza_id}", response_model=PizzaResponse)
 def get_pizza(pizza_id: UUID, session: Session = Depends(get_session)):
-    pizza = session.get(Pizza, pizza_id)
+    statement = select(Pizza).options(selectinload(Pizza.ingredients)).where(Pizza.id == pizza_id)
+    pizza = session.exec(statement).first()
+    
     if not pizza:
         raise HTTPException(status_code=404, detail="Pizza non trouvée")
+    
     return pizza
 
 @router.post("/", response_model=Pizza)
