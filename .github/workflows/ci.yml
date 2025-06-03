@@ -3,6 +3,8 @@ name: CI - Pizza
 on:
   pull_request:
     branches: [main, stage, feat/ci]
+  push:
+    branches: [main, stage, feat/ci]
 
 jobs:
   frontend:
