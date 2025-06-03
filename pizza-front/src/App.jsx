@@ -11,6 +11,9 @@ import { useState } from 'react'
 function App() {
      const [cart, setCart] = useState([]);
      const cartCount= cart.reduce((sum, item) => sum + item.quantity, 0);
+     const handleRemove = (id) => {
+    setCart(cart.filter(item => item.id !== id));
+  };
   return (
        
        <>
@@ -20,7 +23,7 @@ function App() {
                 {/* <Route path="/" element={<Home />}/> */}
                 <Route path="/" element={<Menus cart={cart} setCart={setCart} />}/>
                 <Route path="/contact" element={<Contact />}/>
-                <Route path="/panier" element={<Paniers cart={cart} />}/>
+                <Route path="/panier" element={<Paniers cart={cart} handleRemove={handleRemove} />}/>
             </Routes>
 
 
