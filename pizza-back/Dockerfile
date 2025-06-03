@@ -1,16 +1,16 @@
-# Dockerfile pour le backend Python
 FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copier et installer les dépendances
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install poetry
 
-# Copier tout le code source
+COPY pyproject.toml poetry.lock ./
+
+RUN poetry config virtualenvs.create false && poetry install --no-dev --no-interaction
+
 COPY . .
 
 EXPOSE 8000
 
-# Commande de démarrage (à ajuster selon le développement backend)
-CMD ["python", "-m", "uvicorn", "src.pizza_back.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

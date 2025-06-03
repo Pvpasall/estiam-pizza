@@ -1,46 +1,16 @@
 version: '3.8'
 
 services:
-  # Base de données PostgreSQL
-  db:
-    image: postgres:15-alpine
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: pizzatech
-      POSTGRES_USER: pizza
-      POSTGRES_PASSWORD: password123
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  # Backend Python API
   backend:
     build: ./pizza-back
-    restart: unless-stopped
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql://pizza:password123@db:5432/pizzatech
-      - ENVIRONMENT=development
-    depends_on:
-      - db
     volumes:
-      - ./pizza-back:/app
+      - ./pizza-back/data:/app/data  # Pour rendre la base persistante
+    restart: unless-stopped
 
-  # Frontend React
   frontend:
     build: ./pizza-front
-    restart: unless-stopped
     ports:
-      - "5173:5173"
-    environment:
-      - VITE_API_URL=http://localhost:8000/api
-    volumes:
-      - ./pizza-front:/app
-      - /app/node_modules
-    depends_on:
-      - backend
-
-volumes:
-  postgres_data:
+      - "80:80"
+    restart: unless-stopped

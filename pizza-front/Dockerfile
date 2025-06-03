@@ -1,18 +1,23 @@
-# Dockerfile pour le frontend React
-FROM node:18-alpine
+# Étape 1 : build avec ta version de Node
+FROM node:20.17.0 AS builder
 
 WORKDIR /app
 
-# Copier les fichiers de dépendances
-COPY package*.json ./
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Installer les dépendances avec le fix React Native
-RUN npm install --legacy-peer-deps
-
-# Copier tout le code source
 COPY . .
+RUN npm run build
 
-EXPOSE 5173
+# Étape 2 : serveur statique avec serve
+FROM node:20.17.0
 
-# Démarrer Vite en mode développement
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 80
+
+CMD ["serve", "-s", "dist", "-l", "80"]
