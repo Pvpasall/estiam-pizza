@@ -2,6 +2,10 @@
 
 ### Démmarer le server en local
 - Installer poetry pour la gestion des dépendances: https://python-poetry.org/docs/
+
+- Cloner le projet
+
+- Créer un environnement virtuel:
 ```bash
 poetry env use 3.10
 ```
@@ -17,11 +21,12 @@ poetry run uvicorn app.main:app --reload
 ```
 
 - Accéder à l'API:
+
 ```bash
 http://localhost:8000/docs
 ```
 
-- Run tests:
+- Exécuter les tests unitaires:
 ```bash
 poetry run pytest
 ```
