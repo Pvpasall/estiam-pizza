@@ -58,7 +58,6 @@ class OrderItem(SQLModel, table=True):
     order_id: UUID = Field(foreign_key="order.id")
     pizza_id: UUID = Field(foreign_key="pizza.id")
     quantity: int = Field(default=1)
-    unit_price: float
     order: Order = Relationship(back_populates="items")
     pizza: Pizza = Relationship(back_populates="orders")
     
