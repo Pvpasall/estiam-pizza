@@ -3,7 +3,7 @@ from app.database import create_db_and_tables
 from app.routers import pizza, order
 from app.data import create_test_data
 from app.database import get_session_obj
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Restaurant Pizza API", version="1.0.0")
 
@@ -14,6 +14,14 @@ def on_startup():
 
 app.include_router(pizza.router)
 app.include_router(order.router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000"], 
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"], 
+)
 
 @app.get("/")
 async def get_orders():
