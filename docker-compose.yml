@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./pizza-back
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./pizza-back/data:/app/data  # Pour rendre la base persistante
+    restart: unless-stopped
+
+  frontend:
+    build: ./pizza-front
+    ports:
+      - "80:80"
+    restart: unless-stopped
