@@ -20,3 +20,8 @@ poetry run uvicorn app.main:app --reload
 ```bash
 http://localhost:8000/docs
 ```
+
+- Run tests:
+```bash
+poetry run pytest
+```

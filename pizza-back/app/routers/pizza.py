@@ -1,18 +1,20 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
+from sqlalchemy.orm import selectinload
 from typing import List
 from uuid import UUID
 from app.database import Pizza, get_session
-from app.schemas import PizzaCreate, PizzaUpdate
+from app.schemas import PizzaCreate, PizzaUpdate, PizzaResponse
 
 router = APIRouter(
     prefix="/pizzas", 
     tags=["Pizzas"]
 )
 
-@router.get("/", response_model=List[Pizza])
+@router.get("/", response_model=List[PizzaResponse])
 def list_pizzas(session: Session = Depends(get_session)):
-    pizzas = session.exec(select(Pizza)).all()
+    statement = select(Pizza).options(selectinload(Pizza.ingredients))
+    pizzas = session.exec(statement).all()
     return pizzas
 
 @router.get("/{pizza_id}", response_model=Pizza)
