@@ -6,11 +6,12 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./pizza-back/data:/app/data  # Pour rendre la base persistante
-    restart: unless-stopped
+      - ./pizza-back:/app
 
   frontend:
     build: ./pizza-front
     ports:
-      - "80:80"
-    restart: unless-stopped
+      - "5173:5173"
+    volumes:
+      - ./pizza-front:/app
+      - /app/node_modules
