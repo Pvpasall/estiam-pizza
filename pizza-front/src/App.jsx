@@ -17,8 +17,8 @@ function App() {
        <Navbar cartCount ={cartCount} />
             
             <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/menu" element={<Menus cart={cart} setCart={setCart} />}/>
+                {/* <Route path="/" element={<Home />}/> */}
+                <Route path="/" element={<Menus cart={cart} setCart={setCart} />}/>
                 <Route path="/contact" element={<Contact />}/>
                 <Route path="/panier" element={<Paniers cart={cart} />}/>
             </Routes>

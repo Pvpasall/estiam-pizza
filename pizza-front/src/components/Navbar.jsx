@@ -9,12 +9,12 @@ function Navbar({cartCount}) {
     <header>
         <nav className="navbar">
             <div className='navbar--logo-holder'>
-                <img src={imageLogo} width={60} height={40} alt='logo' className='navbar--logo' />
-                <h1>PizzeriaFree</h1>
+                {/* <img src={imageLogo} width={60} height={40} alt='logo' className='navbar--logo' /> */}
+                <h1  className='titreDebut'><Link className='liens' to="/">PizzeriaFree</Link></h1>
             </div>
             <ul className='navbar--link'>
-                <li className='navbar--link-item'><Link className='nav' to="/">Accueil</Link></li>
-                <li className='navbar--link-item'><Link className='nav' to="/menu">Menu</Link></li>
+                {/* <li className='navbar--link-item'><Link className='nav' to="/">Accueil</Link></li> */}
+                <li className='navbar--link-item'><Link className='nav' to="/">Menu</Link></li>
                 <li className='navbar--link-item'><Link className='nav' to="/contact">Contact</Link></li>
                 <li className='navbar--link-item'>
                     <Link className='nav cart-link' to="/panier" style={{position: "relative"}}>
