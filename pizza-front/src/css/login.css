@@ -1,0 +1,38 @@
+form{
+    border: 3px solid #f1f1f1;
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    margin-left: 400px;
+}
+
+.input-taille {
+  width: 100%;
+  padding: 20px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.input-taille2 {
+  margin-top: 250px;
+}
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+img{
+    text-align: center;
+}
