@@ -18,6 +18,10 @@ jobs:
       - name: Pizza front Docker image
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pizza-front:test -f pizza-front/Dockerfile ./pizza-front
 
+      - name: Run front tests inside container
+        run: docker run --rm ${{ secrets.DOCKERHUB_USERNAME }}/pizza-front:test \
+               npm run test --if-present
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -57,7 +61,3 @@ jobs:
           docker tag ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:test \
                      ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest
-
-
-outputs:
-  images-pushed: ${{ success() }}

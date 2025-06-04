@@ -3,8 +3,7 @@ name: CD - Pizza
 on:
   workflow_run:
     workflows: [ "CI - Pizza" ]
-    types:
-      - completed
+    types: [completed]
 
 jobs:
   deploy:
