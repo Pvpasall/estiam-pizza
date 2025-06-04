@@ -7,7 +7,7 @@
 
 - Créer un environnement virtuel:
 ```bash
-poetry env use 3.10
+poetry env use 3.13
 ```
 
 - Installer les dépendances du projet:

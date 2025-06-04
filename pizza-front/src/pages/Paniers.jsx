@@ -1,8 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import '../css/panier.css'
 
 function Paniers({cart, handleRemove}) {
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const navigate = useNavigate();
+  const handleValidate = () => {
+    navigate('/formulaire', {state:{cart}});
+  };
+
  return (
     <>
      <h1 className='panier'>Récapitulatif de mon panier</h1>
@@ -10,7 +17,7 @@ function Paniers({cart, handleRemove}) {
       <ul className="cart-list">
         {cart.map(item => (
           <li key={item.id} className="cart-item">
-            <img src={item.image_url} alt={item.name} className="cart-item-image" />
+            <img src={`/images/pizzas/${item.name}.jpeg`} alt={item.name} className="cart-item-image" />
             <div className="cart-item-info">
               <span className="cart-item-name">{item.name}</span>
               <span>prix : <b>{item.price}</b></span><br />
@@ -29,7 +36,8 @@ function Paniers({cart, handleRemove}) {
       <div className="cart-summary">
         <h3>Résumé de la commande</h3>
         <div>Total : <strong>{total.toFixed(2)} €</strong></div>
-        <button className="cart-validate">Valider la commande</button>
+        <button className="cart-validate" onClick={handleValidate}>Valider la commande</button>
+        
       </div>
     </div>
 </>
