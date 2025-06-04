@@ -3,13 +3,13 @@
 Cette API est construite avec FastAPI, SQLModel et utilise une base de données SQLite.
 Elle permet de gérer un système de commande de pizzas incluant :
 
- - la consultation de pizzas disponibles,
+- la consultation de pizzas disponibles,
 
- - la création de clients,
+- la création de clients,
 
- - la création et la consultation des commandes,
+- la création et la consultation des commandes,
 
- - la gestion des utilisateurs et des rôles (store admin, etc.).
+- la gestion des utilisateurs et des rôles (store admin, etc.).
 
 ### Configuration
 #### Installation
@@ -27,19 +27,19 @@ cd pizza-back
 poetry env use 3.10
 ```
 
-    5) Installer les dépendances du projet:
+5) Installer les dépendances du projet:
 ```bash
 poetry install
 ```
 
 
 #### Exécution
-  - Lancer le serveur :
+6) Lancer le serveur :
 ```bash
 poetry run uvicorn app.main:app --reload
 ```
 
-  - Accéder à l'API :
+7) Accéder à l'API :
 ```bash
 http://localhost:8000/docs
 ```
@@ -65,7 +65,10 @@ poetry run pytest
 
 ### Liens utiles
 [Telechargement Python](https://www.python.org/downloads/)
+
 [Documentation FastAPI](https://fastapi.tiangolo.com/)
+
 [Documentation SQLModel](https://sqlmodel.tiangolo.com/)
+
 [Poetry](https://python-poetry.org/)
 
