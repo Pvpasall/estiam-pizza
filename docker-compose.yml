@@ -1,32 +1,19 @@
+version: "3.8"
+
 services:
   backend:
-    depends_on:
-      - frontend
-    build:
-      context: pizza-back
-      dockerfile: Dockerfile
+    image: souleymanevml/pizza-back:latest
     container_name: estiam-pizza-backend
     restart: always
     ports:
       - "8000:8000"
     working_dir: /app
-    command:
-      [
-        "poetry",
-        "run",
-        "uvicorn",
-        "app.main:app",
-        "--host",
-        "0.0.0.0",
-        "--reload",
-      ]
-    volumes:
-      - ./pizza-back:/app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    depends_on:
+      - frontend
 
   frontend:
-    build:
-      context: pizza-front
-      dockerfile: Dockerfile
+    image: souleymanevml/pizza-front:latest
     container_name: estiam-pizza-frontend
     restart: always
     ports:
@@ -34,6 +21,4 @@ services:
     working_dir: /app
     environment:
       - VITE_API_BASE_URL=http://localhost:8000
-    volumes:
-      - ./pizza-front:/app
-      - /app/node_modules
+   
