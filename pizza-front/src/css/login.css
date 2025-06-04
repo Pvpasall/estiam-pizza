@@ -1,9 +1,7 @@
 form{
     border: 3px solid #f1f1f1;
-    /* width: 500px; */
     height: 500px;
     text-align: center;
-    /* margin-left: 400px; */
 }
 
 .input-taille {
@@ -21,9 +19,15 @@ form{
 .container {
   padding: 16px;
   text-align: center;
+    border: 3px solid #f1f1f1;
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    margin-left: 400px;
 }
 
-button {
+
+.validerBouton{
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;

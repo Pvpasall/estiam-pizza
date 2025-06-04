@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../css/formulaire.css'; 
+import '../css/Formulaire.css'; 
+import { useNavigate } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export default function FormulaireCommande({handleClearCart}) {
@@ -16,7 +17,7 @@ export default function FormulaireCommande({handleClearCart}) {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async  (e) => {
       e.preventDefault();
       const commande = {
@@ -48,6 +49,7 @@ export default function FormulaireCommande({handleClearCart}) {
         console.log("Commande envoyée :", commande);
         alert("Commande envoyée !");
         handleClearCart();
+      navigate('/');
     }catch(error){
       alert("Erreur : " + error.message);
     }
@@ -62,7 +64,7 @@ export default function FormulaireCommande({handleClearCart}) {
         <input name="email" placeholder="Email" type="email" value={form.email} onChange={handleChange} required />
         <input name="telephone" placeholder="Téléphone" value={form.telephone} onChange={handleChange} required />
         <textarea name="adresse" placeholder="Adresse complète" value={form.adresse} onChange={handleChange} required />
-        <button type="submit">Envoyer la commande</button>
+        <button className='valider' type="submit">Envoyer la commande</button>
       </form>
     </div>
   );
