@@ -21,3 +21,5 @@ EXPOSE 8000
 
 # Démarrer l'API FastAPI
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+# La base SQLite sera générée automatiquement dans /app/database.db et persistera grâce au volume Docker

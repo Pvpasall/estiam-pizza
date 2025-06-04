@@ -13,7 +13,7 @@ services:
     working_dir: /app
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     volumes:
-      - backend-data:/app  # Pour persister la base sqlite si besoin
+      - backend-data:/app 
 
   frontend:
     image: souleymanevml/pizza-front:latest
