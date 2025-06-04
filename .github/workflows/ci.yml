@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run backend tests
-        run: docker run --rm -v $GITHUB_WORKSPACE/pizza-back/tests:/tests \
+        run: docker run --rm  \
              ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:test \
              pytest /tests -q
 
