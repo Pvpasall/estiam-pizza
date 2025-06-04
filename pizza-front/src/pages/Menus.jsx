@@ -75,7 +75,7 @@ function Menus({ cart, setCart }) {
             <div className="quantity-controls">
               <button onClick={() => handleDecrease(pizza.id)}>-</button>
               <span style={{ margin: "0 10px" }}>{quantities[pizza.id]}</span>
-              <button onClick={() => handleIncrease(pizza.id)}>+</button>
+              <button onClick={() => handleIncrease(pizza.id)}>+</button> 
             </div>
             <button
               className="add-to-cart"

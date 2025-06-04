@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../hooks/use-auth';
 import { useNavigate } from 'react-router-dom';
 import '../css/login.css'
-import photo from '../assets/login.png'
+
 
 
 const LoginPage = () => {
@@ -56,7 +56,7 @@ const LoginPage = () => {
           />
             </div>
           <div>
-            <button type="submit" disabled={loading}>
+            <button className='validerBouton' type="submit" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
             </button>
           </div>
