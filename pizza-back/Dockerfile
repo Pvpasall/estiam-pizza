@@ -11,14 +11,14 @@ RUN apt-get update \
 RUN pip install --no-cache-dir poetry
 
 # Copier les fichiers de config
-COPY pyproject.toml poetry.lock* README.md ./
+# COPY pyproject.toml poetry.lock* README.md ./
+COPY . .
 
 # Installer les dépendances (prod uniquement)
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
 # Copier le code source
-COPY . .
 
 EXPOSE 8000
 
