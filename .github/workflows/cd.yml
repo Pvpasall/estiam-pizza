@@ -1,0 +1,26 @@
+name: CD - Pizza
+
+on:
+  workflow_run:
+    workflows: [ "CI - Pizza" ]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start SSH agent and add key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<'EOF'
+            set -e
+            cd /home/ubuntu/estiam-pizza
+            docker-compose pull
+            docker-compose up -d
+          EOF

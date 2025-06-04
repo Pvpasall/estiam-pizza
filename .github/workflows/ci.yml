@@ -16,10 +16,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Pizza front Docker image
-        run: docker build -t pizza-front ./pizza-front
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pizza-front:test -f pizza-front/Dockerfile ./pizza-front
 
-      - name: Run frontend tests
-        run: docker run --rm pizza-front
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Tag & push pizza-front image
+        run: |
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/pizza-front:test \
+                      ${{ secrets.DOCKERHUB_USERNAME }}/pizza-front:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/pizza-front:latest
 
   backend:
     name: Pizza backend
@@ -29,8 +38,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Pizza back Docker image
-        run: docker build -t pizza-back ./pizza-back
+      - name: Run backend tests
+        run: docker run --rm -v $GITHUB_WORKSPACE/pizza-back/tests:/tests \
+             ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:test \
+             pytest /tests -q
 
       - name: Run backend tests
         run: docker run --rm pizza-back
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Tag & push back image
+        run: |
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:test \
+                     ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest
+
+
+outputs:
+  images-pushed: ${{ success() }}
