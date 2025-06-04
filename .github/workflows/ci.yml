@@ -53,6 +53,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push backend image (prod)
+        uses: docker/build-push-action@v6
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest -f pizza-back/Dockerfile ./pizza-back
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest
