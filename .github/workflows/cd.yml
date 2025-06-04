@@ -1,3 +1,13 @@
+name: CD - Pizza
+
+on:
+  push:
+      branches: [main, stage, feat/ci]
+  workflow_run:
+    workflows: [ "CI - Pizza" ]
+    types: [completed]
+  workflow_dispatch:
+
 jobs:
   deploy:
     if: |
