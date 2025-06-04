@@ -38,22 +38,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Build backend image (test)
+        run: |
+          docker build -t pizza-back-test -f pizza-back/Dockerfile ./pizza-back
+
+      - name: Run backend tests
+        run: |
+          docker run --rm pizza-back-test poetry run pytest
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
-      - name: Test backend
-        run: |
-          docker build \
-            --target test \
-            --tag "${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:test" \
-            ./pizza-back
 
-      - name: Build and push backend image
+      - name: Build and push backend image (prod)
         run: |
-          docker build \
-            --tag "${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest" \
-            ./pizza-back
-          docker push "${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest"
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest -f pizza-back/Dockerfile ./pizza-back
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/pizza-back:latest
