@@ -7,13 +7,10 @@ services:
     restart: always
     ports:
       - "8000:8000"
-    environment:
-      # Exemple : DATABASE_URL=sqlite:///app/database.db
-      # Ajoute ici tes variables d'environnement backend si besoin
     working_dir: /app
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     volumes:
-      - backend-data:/app 
+      - backend-data:/app
 
   frontend:
     image: souleymanevml/pizza-front:latest
@@ -21,8 +18,6 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    environment:
-      - VITE_API_BASE_URL=http://<EC2_PUBLIC_IP>:8000
     working_dir: /app
     command: ["serve", "-s", "dist", "-l", "3000"]
 
