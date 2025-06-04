@@ -7,7 +7,7 @@ function Paniers({cart, handleRemove}) {
 
   const navigate = useNavigate();
   const handleValidate = () => {
-    navigate('/formulaire');
+    navigate('/formulaire', {state:{cart}});
   };
 
  return (
@@ -17,7 +17,7 @@ function Paniers({cart, handleRemove}) {
       <ul className="cart-list">
         {cart.map(item => (
           <li key={item.id} className="cart-item">
-            <img src={item.image_url} alt={item.name} className="cart-item-image" />
+            <img src={`/images/pizzas/${item.name}.jpeg`} alt={item.name} className="cart-item-image" />
             <div className="cart-item-info">
               <span className="cart-item-name">{item.name}</span>
               <span>prix : <b>{item.price}</b></span><br />

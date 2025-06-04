@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../css/formulaire.css'; 
+const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
-export default function FormulaireCommande() {
+export default function FormulaireCommande({handleClearCart}) {
+  const location = useLocation();
+  const cart = location.state?.cart || [];
   const [form, setForm] = useState({
     nom: '',
     email: '',
@@ -13,15 +17,46 @@ export default function FormulaireCommande() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Commande envoyée :", form);
-    alert("Commande envoyée !");
+  const handleSubmit = async  (e) => {
+      e.preventDefault();
+      const commande = {
+      client: {
+        nom: form.nom,
+        email: form.email,
+        phone: form.telephone,
+        address: form.adresse
+      },
+      items: cart.map(item => ({
+        pizza_id: item.id,
+        quantity: item.quantity,
+        unit_price: item.price
+      })),
+      delivery_address: form.adresse
+  };
+
+    try{
+      const response = await fetch(`${apiUrl}/orders/`,{
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commande),
+      });
+        if(!response.ok){
+          throw new Error("Erreur lors de l'envoi de la commande");
+        }
+        console.log("Commande envoyée :", commande);
+        alert("Commande envoyée !");
+        handleClearCart();
+    }catch(error){
+      alert("Erreur : " + error.message);
+    }
   };
 
   return (
     <div className="formulaire-container">
       <h2>Finaliser la commande</h2>
+      
       <form onSubmit={handleSubmit} className="formulaire-commande">
         <input name="nom" placeholder="Nom" value={form.nom} onChange={handleChange} required />
         <input name="email" placeholder="Email" type="email" value={form.email} onChange={handleChange} required />

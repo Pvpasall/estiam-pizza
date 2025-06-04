@@ -1,11 +1,21 @@
 import './App.css'
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import {
+  BrowserRouter as Router,Routes,
+  Route,
+  Link,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Menus from './pages/Menus'
 import Contact from './pages/Contact'
 import Paniers from './pages/Paniers'
 import { useState } from 'react'
+import FormulaireCommande from './pages/FormulaireCommande';
+import AdminPage from "./pages/Admin";
+import LoginPage from "./pages/Login";
+import useAuth from "./hooks/use-auth"
 
 
 function App() {
@@ -14,6 +24,9 @@ function App() {
   const handleRemove = (id) => {
     setCart(cart.filter((item) => item.id !== id));
   };
+    const handleClearCart = () => {
+    setCart([]);
+  };
   const location = useLocation();
   const hideNavbar =
     location.pathname.startsWith("/admin") ||
@@ -21,13 +34,17 @@ function App() {
   return (
        
        <>
-       <Navbar cartCount ={cartCount} />
+       {!hideNavbar && <Navbar cartCount ={cartCount} />}
             
             <Routes>
                 {/* <Route path="/" element={<Home />}/> */}
                 <Route path="/" element={<Menus cart={cart} setCart={setCart} />}/>
                 <Route path="/contact" element={<Contact />}/>
                 <Route path="/panier" element={<Paniers cart={cart} handleRemove={handleRemove} />}/>
+                <Route path="/formulaire" element={<FormulaireCommande handleClearCart={handleClearCart}/>}/>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/admin" element={<ProtectedRoute> <AdminPage /></ProtectedRoute>}
+               />
             </Routes>
 
 
