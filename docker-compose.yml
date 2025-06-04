@@ -1,17 +1,30 @@
-version: '3.8'
+version: "3.8"
 
 services:
   backend:
-    build: ./pizza-back
+    image: souleymanevml/pizza-back:latest
+    container_name: estiam-pizza-backend
+    restart: always
     ports:
       - "8000:8000"
+    environment:
+      # Exemple : DATABASE_URL=sqlite:///app/database.db
+      # Ajoute ici tes variables d'environnement backend si besoin
+    working_dir: /app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     volumes:
-      - ./pizza-back:/app
+      - backend-data:/app  # Pour persister la base sqlite si besoin
 
   frontend:
-    build: ./pizza-front
+    image: souleymanevml/pizza-front:latest
+    container_name: estiam-pizza-frontend
+    restart: always
     ports:
-      - "5173:5173"
-    volumes:
-      - ./pizza-front:/app
-      - /app/node_modules
+      - "3000:3000"
+    environment:
+      - VITE_API_BASE_URL=http://<EC2_PUBLIC_IP>:8000
+    working_dir: /app
+    command: ["serve", "-s", "dist", "-l", "3000"]
+
+volumes:
+  backend-data:
