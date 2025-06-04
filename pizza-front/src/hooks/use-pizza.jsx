@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 
-const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/pizzas` || 'http://localhost:8000'
+const apiUrl = import.meta.env.VITE_API_BASE_URL
+  ? `${import.meta.env.VITE_API_BASE_URL}/pizzas`
+  : 'http://localhost:8000/pizzas';
 
 /**
  * @typedef {Object} Pizza
