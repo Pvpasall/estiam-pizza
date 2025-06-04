@@ -38,6 +38,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Build back image
+        run: docker build -t pizza-back:test -f pizza-back/Dockerfile ./pizza-back
+
       - name: Run backend tests
         run: |
           docker run --rm -v $(pwd)/pizza-back/tests:/tests \
