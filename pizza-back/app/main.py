@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.database import create_db_and_tables
-from app.routers import pizza, order
+from app.routers import pizza, order, auth
 from app.data import create_test_data
 from app.database import get_session_obj
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,6 +14,7 @@ def on_startup():
 
 app.include_router(pizza.router)
 app.include_router(order.router)
+app.include_router(auth.router)
 
 app.add_middleware(
     CORSMiddleware,

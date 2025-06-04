@@ -1,6 +1,8 @@
 from uuid import uuid4
 from sqlmodel import Session, create_engine
-from app.database import Ingredients, Pizza
+from app.database import Ingredients, Pizza, StoreUser
+from passlib.context import CryptContext
+from datetime import datetime
 
 ingredients_data = [
     {"ingredient": "Mozzarella"},
@@ -110,6 +112,14 @@ pizza_data = [
     }
 ]
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+store_user = {
+    "id": uuid4(),
+    "username": "admin",
+    "email": "admin@pizzatech.com",
+    "hashed_password": pwd_context.hash("admin123"),
+    "is_active": True,
+}
 
 def create_test_data(session: Session):
     existing_pizzas = session.query(Pizza).first()
@@ -134,7 +144,14 @@ def create_test_data(session: Session):
             ingredients=[ingredients[name] for name in pizza_info["ingredient_names"]]
         )
         session.add(pizza)
-    
-
     session.commit()
+    
+    existing_user = session.query(StoreUser).filter(
+        StoreUser.username == "admin"
+    ).first()
+    
+    if not existing_user:
+        user = StoreUser(**store_user)
+        session.add(user)
+        session.commit()
 
