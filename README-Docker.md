@@ -73,10 +73,14 @@ docker-compose up --build
 3. 🚀 Déploiement AWS EC2 avec cette config
 4. 🔧 CI/CD Pipeline avec GitHub Actions
 
-## 👤 Khadim Mbacké FALL
 
-**Rôle** : Infra Master  
-**Responsabilité** : Docker, déploiement, infrastructure
+
+
+## Rôle : Infra Master  
+## Responsabilité : Docker, déploiement, infrastructure, instance AWS
+
+ **👤 Khadim Mbacké FALL**
+ **👤 Celaire OKA**
 
 ---
 
