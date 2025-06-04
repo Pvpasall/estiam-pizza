@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: [ "CI - Pizza" ]
     types: [completed]
-  workflow_dispatch:
+  # workflow_dispatch:
 
 jobs:
   deploy:
