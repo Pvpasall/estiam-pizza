@@ -10,8 +10,6 @@ RUN apt-get update \
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/root/.local/bin:$PATH"
 
-COPY pyproject.toml poetry.lock* README.md ./
-
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
@@ -32,7 +30,7 @@ RUN apt-get update \
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
-    ENV PATH="/root/.local/bin:$PATH"
+ENV PATH="/root/.local/bin:$PATH"
 
 COPY pyproject.toml poetry.lock ./
 
